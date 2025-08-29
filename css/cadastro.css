@@ -1,0 +1,172 @@
+@font-face {
+    font-family: 'SFPRO BOLD';
+    src: url("../assets/fontes/SFPRODISPLAYBOLD.OTF") format('truetype');
+  }
+@font-face {
+    font-family: 'SFPRO MEDIUM';
+    src: url("../assets/fontes/SFPRODISPLAYMEDIUM.OTF");
+}
+
+@font-face {
+    font-family: 'SFPRO REGULAR';
+    src: url("../assets/fontes/SFPRODISPLAYREGULAR.OTF");
+}
+body{
+    background-color: black;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+
+    /* overflow: hidden; */
+
+}
+
+h1{
+    font-family: SFPRO BOLD;
+    color: #ffcf00;
+    padding-left: 100px;
+    font-size: 33pt;
+
+}
+
+#imgLateral{
+    width: 600px;
+    height: 600px;
+    margin: 0;
+    padding-left: 180px;
+    
+    
+}
+
+#containerLateral{
+    height: 100vh;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#cadastro{
+    display: flex;
+    margin-left: auto;
+    background-color: white;
+    height: 100vh;
+    width: 887.2px;
+    
+    align-items: center;
+    flex-direction: column;
+
+    
+}
+
+#cadastro svg{
+    display: block;
+    padding-top: 70px;
+    padding-bottom: 20px;
+    width: 300px;
+    height: 200px;
+    margin-bottom: 0px;
+    
+    
+}
+
+form{
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+form input{
+    display: flex;
+    width: 750px;
+    height: 40px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #efefef;
+    padding: 8px;
+    
+    font-family: SFPRO REGULAR;
+    font-size: 12pt;
+    transition: 0.3s;
+
+}
+
+form input::placeholder{
+    padding-left: 10px;
+}
+
+form input:focus{
+    background-color: #d8d7d7;
+    
+    outline: none;
+}
+
+#checkboxContainer{
+    display: flex;
+    margin-top: 20px;
+}
+
+#checkboxContainer p{
+    transform: translateY(-17px);
+    font-family: SFPRO BOLD;
+    font-size: 14pt;
+    margin-left: 10px;
+}
+
+.checkbox-container {
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
+
+.checkbox-container input {
+    opacity: 0; /* esconde o input real */
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background-color: #efefef;
+    border-radius: 5px;
+}
+
+.checkbox-container input:checked + .checkmark {
+    background-color: #ffcf00; /* fundo amarelo */
+}   
+
+.checkbox-container input:checked + .checkmark::after {
+    content: "✔";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+}
+
+#checkboxContainer a{
+    text-decoration: none;
+    color: #ffcf00;
+}
+
+#checkboxContainer a:hover{
+    text-decoration: underline;
+}
+
+#cadastrar{
+    width: 220px;
+    height: 50px;
+    background-color: #ffcf00;
+    font-family: SFPRO BOLD;
+}
+
+

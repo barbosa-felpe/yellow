@@ -1,0 +1,154 @@
+@font-face {
+    font-family: 'SFPRO BOLD';
+    src: url("../assets/fontes/SFPRODISPLAYBOLD.OTF") format('truetype');
+  }
+@font-face {
+    font-family: 'SFPRO MEDIUM';
+    src: url("../assets/fontes/SFPRODISPLAYMEDIUM.OTF");
+}
+
+@font-face {
+    font-family: 'SFPRO REGULAR';
+    src: url("../assets/fontes/SFPRODISPLAYREGULAR.OTF");
+}
+
+
+
+body{
+    margin: 0;
+    transition: background-color 0.8s ease; /* animação suave */
+    background-color: #ffcf00;
+    font-family: SFPRO MEDIUM, sans-serif;
+}
+
+header{
+    background-color: #000000;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+img{
+    height: 200px;
+}
+
+header button{
+    background-color: #ffcf00;
+    border: none;
+    width: 201.1px;
+    height: 47px;
+    border-radius: 10px;
+    font-family: SFPRO MEDIUM, sans-serif;
+    font-size: 14pt;
+}
+
+header button:hover{
+    background-color: #c2a317;
+    cursor: pointer;
+}
+
+#main1{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 73vh;
+    
+}
+
+#main2{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 148vh;
+    
+    
+}
+
+#main3{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+    background-color: #ffcf00;
+}
+
+main #container{
+    text-align: center;
+}
+
+main h1{
+    font-size: 35.5pt;
+    margin-top: 0;
+}
+
+main button{
+    background-color: #000000;
+    color: #ffcf00;
+    border: none;
+    width: 508.2px;
+    height: 80.3px;
+    border-radius: 10px;
+    font-family: SFPRO BOLD, sans-serif;
+    font-size: 17pt;
+}
+
+main button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.384);
+}
+
+main button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px  rgba(0, 0, 0, 0.384);
+}
+
+main svg{
+    display: block;
+    
+}
+
+#main2 h1{
+    color: #ffcf00;
+    font-size: 52pt;
+    margin-bottom: 0;
+}
+
+#main2 p{
+    color: #ffcf00;
+    font-family: SFPRO REGULAR, sans-serif;
+    font-size: 20pt;
+    margin-top: 26.6px;
+}
+
+#main2 svg{
+    transform: translateX(100px);
+    
+}
+
+#main2 button{
+    background-color: #ffcf00;
+    color: #000000;
+    border: none;
+    width: 508.2px;
+    height: 80.3px;
+    border-radius: 10px;
+    font-family: SFPRO BOLD, sans-serif;
+    font-size: 17pt;
+    margin-top: 10.6px;
+}
+
+#main2 button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 196, 0, 0.384);
+}
+
+#main2 button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px  rgba(255, 196, 0, 0.384);
+}
