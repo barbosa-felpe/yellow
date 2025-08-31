@@ -1,3 +1,5 @@
+function backgroundPage(){
+
 window.addEventListener("scroll", function () {
   const scrollY = window.scrollY;
 
@@ -14,3 +16,31 @@ window.addEventListener("scroll", function () {
       document.body.style.backgroundColor = "#ffcf00"; 
   }
 });
+
+}
+
+function enviar(){
+    const nmCompleto = document.getElementById("nmCompleto").value
+    const senha = document.getElementById("senha").value
+    const tel = document.getElementById("tel").value
+    const email = document.getElementById("email").value
+    const cpf = document.getElementById("cpf").value
+
+    const usuario = {
+        "nome": nmCompleto,
+        "senha": senha,
+        "tel": tel,
+        "email": email,
+        "cpf": cpf
+    }
+
+    fetch("/cadastrar", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(usuario)  
+    })
+
+    .then(res => res.json())
+    .then(data => alert(data.mensagem))
+    .catch(err => console.error(err))
+}
