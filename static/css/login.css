@@ -90,9 +90,6 @@ form {
     justify-content: center;
 }
 
-.cadastrin p{
-    margin-left: 5px;
-}
 
 #checkboxContainer{
     display: flex;
@@ -105,6 +102,13 @@ form {
     font-size: 14pt;
     margin-left: 10px;
 }
+
+.senhas p{
+    margin-top: 3px ;
+    margin-left: 4px;
+}
+
+
 
 .checkbox-container {
     display: inline-block;
@@ -126,9 +130,11 @@ form {
     left: 0;
     width: 25px;
     height: 25px;
-    margin-left: 5px;
+    margin-left: 9px;
     background-color: #efefef;
     border-radius: 5px;
+    margin-bottom: 5px;
+
 }
 
 .checkbox-container input:checked + .checkmark {
@@ -198,7 +204,7 @@ input[type="text"], input[type="password"]{
     margin-top: 57px;
     margin-left: 375px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .butão{
