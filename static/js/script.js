@@ -23,7 +23,7 @@ document.getElementById("formCadastro").addEventListener("submit", function(e) {
       cpf: document.getElementById("cpf").value
     };
   
-    fetch("http://127.0.0.1:5000/cadastrar", {
+    fetch("/cadastrar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(usuario)

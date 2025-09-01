@@ -16,11 +16,11 @@ def cadastro():
 def cadastrar():
     usuario = request.get_json(force=True)
     print("Recebido no Flask:", usuario)
+    
 
     if not usuario:
         return jsonify({"mensagem": "Erro: nenhum dado recebido"}), 400
 
-    # Cria arquivo se não existir
     if os.path.exists(ARQUIVO_JSON):
         with open(ARQUIVO_JSON, "r") as f:
             usuarios = json.load(f)

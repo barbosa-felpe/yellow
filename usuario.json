@@ -1,3 +1,9 @@
-{
-    "usuarios": []
-}
+[
+  {
+    "nome": "Felipe Barbosa",
+    "senha": "12345678",
+    "tel": "45 99999-2920",
+    "email": "felipe@gmail.com",
+    "cpf": "12345678901"
+  }
+]
