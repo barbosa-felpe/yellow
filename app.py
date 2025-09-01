@@ -18,7 +18,6 @@ def cadastro():
 def login():
     return render_template("login.html")
 
-
 @app.route("/cadastrar", methods=["POST"])
 def cadastrar():
     novo_usuario = request.get_json(force=True)  # renomeei p/ evitar conflito
