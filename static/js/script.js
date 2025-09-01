@@ -29,6 +29,6 @@ document.getElementById("formCadastro").addEventListener("submit", function(e) {
       body: JSON.stringify(usuario)
     })
     .then(res => res.json())
-    .then(data => alert(data.mensagem))
+    .then(data => alert(data.mensagem || data.erro))
     .catch(err => console.error(err));
   });
