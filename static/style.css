@@ -1,17 +1,16 @@
 @font-face {
     font-family: 'SFPRO BOLD';
-    src: url("../assets/fontes/SFPRODISPLAYBOLD.OTF") format('truetype');
+    src: url("../static/fontes/SFPRODISPLAYBOLD.OTF") format('truetype');
   }
 @font-face {
     font-family: 'SFPRO MEDIUM';
-    src: url("../assets/fontes/SFPRODISPLAYMEDIUM.OTF");
+    src: url("../static/fontes/SFPRODISPLAYMEDIUM.OTF");
 }
 
 @font-face {
     font-family: 'SFPRO REGULAR';
-    src: url("../assets/fontes/SFPRODISPLAYREGULAR.OTF");
+    src: url("../static/fontes/SFPRODISPLAYREGULAR.OTF");
 }
-
 
 
 body{
