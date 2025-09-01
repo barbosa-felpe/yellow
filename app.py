@@ -12,6 +12,10 @@ def index():
 def cadastro():
     return render_template("cadastro.html")
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
 @app.route("/cadastrar", methods=["POST"])
 def cadastrar():
     usuario = request.get_json(force=True)
