@@ -21,7 +21,7 @@ def login():
 
 @app.route("/cadastrar", methods=["POST"])
 def cadastrar():
-    novo_usuario = request.get_json(force=True)  # renomeei p/ evitar conflito
+    novo_usuario = request.get_json()  # renomeei p/ evitar conflito
     print("Recebido no Flask:", novo_usuario)
 
     if not novo_usuario:
@@ -38,6 +38,14 @@ def cadastrar():
     for usuario in usuarios:
         if usuario["cpf"] == novo_usuario["cpf"]:
             return jsonify({"erro": "CPF já cadastrado"}), 400
+
+    for usuario in usuarios:
+        if usuario["email"] == novo_usuario["email"]:
+            return jsonify({"erro": "Email já cadastrado"}), 400
+        
+    for usuario in usuarios:
+        if usuario["tel"] == novo_usuario["tel"]:
+            return jsonify({"erro": "Email já cadastrado"}), 400
 
     # Se não existir, adiciona
     usuarios.append(novo_usuario)
