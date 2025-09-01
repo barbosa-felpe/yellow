@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <title>Cadastre-se e dê um novo passo para sua vida urbana.</title>
 </head>
@@ -83,7 +83,7 @@
 
     <div id="cadastro">
 
-        <svg onclick="window.location.href='index.html'" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg"
+        <svg onclick="window.location.href='/'" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" width="684" zoomAndPan="magnify" viewBox="0 0 513 127.500001"
             height="170" preserveAspectRatio="xMidYMid meet" version="1.2">
             <g id="6012ee46a3">
@@ -92,12 +92,12 @@
             </g>
         </svg>
 
-        <form action="">
+        <form onsubmit="enviar(event)" id="formCadastro" action="">
 
-            <input type="text" placeholder="Nome Completo" required>
-            <input type="password" placeholder="Senha" required>
-            <input type="tel" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" placeholder="Número de Telefone" required>
-            <input type="email" placeholder="Email" required>
+            <input type="text" id="nmCompleto" placeholder="Nome Completo" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            <input type="tel" id="tel" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" placeholder="Número de Telefone" required>
+            <input type="email" placeholder="Email" required id="email">
             <input type="text" id="cpf" placeholder="CPF" maxlength="11" required>
 
             <div id="checkboxContainer">
@@ -115,6 +115,8 @@
         </form>
     </div>
 
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>
