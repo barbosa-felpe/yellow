@@ -14,25 +14,26 @@
         <div class="coluna esquerda">
             <div class="cadastrin">
                 <form action="">
-                <img src="../static/img/Yellow Letra.png" style="cursor: pointer;" onclick="window.location.href='/'" alt="" class="letra">
-                <input type="text" placeholder="CPF: " class="inp">
-                <input type="password" placeholder="Senha: " class="inp">
+                    <img src="../static/img/Yellow Letra.png" style="cursor: pointer;"
+                        onclick="window.location.href='/'" alt="" class="letra">
+                    <input type="text" placeholder="CPF: " class="inp">
+                    <input type="password" placeholder="Senha: " class="inp">
 
-                <div class="senhas">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="checkbox">
-                        <span class="checkmark"></span>
-                    </label> 
-                    
-                    <p>Lembre de Mim</p>
+                    <div class="senhas">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
 
-                    
-                </div>
+                        <p>Lembre de Mim</p>
+
+
+                    </div>
 
                     <a href="#" class="esqueci">Esqueci a senha</a>
-                
-                <button class="butão" type="submit">Entrar</button>
-            </form>
+
+                    <input type="submit" class="butão" onclick="event.preventDefault(); window.location.href='/dashboard'">
+                </form>
             </div>
         </div>
 

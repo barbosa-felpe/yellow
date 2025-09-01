@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'SFPRO BOLD';
+    src: url("../fontes/SFPRODISPLAYBOLD.OTF") format('truetype');
+  }
+@font-face {
+    font-family: 'SFPRO MEDIUM';
+    src: url("../fontes/SFPRODISPLAYMEDIUM.OTF");
+}
+
+@font-face {
+    font-family: 'SFPRO REGULAR';
+    src: url("../fontes/SFPRODISPLAYREGULAR.OTF");
+}
+
+body{
+    margin: 0;
+    font-family: SFPRO BOLD;
+}
+
+header{
+    background-color: #ffcf00;
+    height: 100px;
+    display: flex;
+    justify-content: space-between; /* deixa os itens começando do canto esquerdo */
+    padding: 0 20px;
+    align-items: center;
+
+ /* opcional, para não grudar no canto */
+   
+}
+
+svg{
+    height: 60px;
+}
+
+ul{
+    justify-content: flex-end;
+    list-style-type: none;
+    display: flex;
+    gap: 60px;
+    padding-right: 50px;
+    font-family: SFPRO BOLD;
+    font-size: 15pt;
+}
+
+#containerSaldo{
+    background-color: #efefef;
+    height: 300px;
+    width: 600px;
+    border-radius: 25px;
+    padding: 70px 0 0 50px; /* espaço do topo e da esquerda */
+    margin-left: 50px;
+    margin-top: 50px;
+    box-sizing: border-box;
+    position: relative;
+
+}
+
+#containerSaldo h4{
+    margin: 0;
+    font-size: 18pt;
+}
+
+#containerSaldo h1{
+    margin: 5px 0 0 0; 
+    font-size: 44pt;
+}
+
+#containerSaldo .saldo-escrita{
+    display: flex;
+    align-items: baseline;
+}
+
+#blind{
+    position: absolute;
+    height: 50px;
+    transform: translate(150px, 15px);
+    cursor: pointer;
+}

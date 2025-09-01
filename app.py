@@ -18,6 +18,10 @@ def cadastro():
 def login():
     return render_template("login.html")
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
 @app.route("/cadastrar", methods=["POST"])
 def cadastrar():
     novo_usuario = request.get_json()  # renomeei p/ evitar conflito
@@ -54,6 +58,7 @@ def cadastrar():
         json.dump(usuarios, f, indent=2)
 
     return jsonify({"mensagem": "Cadastro realizado com sucesso!"})
+
 
 
 if __name__ == "__main__":
