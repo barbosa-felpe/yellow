@@ -59,6 +59,7 @@ ul{
 #containerSaldo h4{
     margin: 0;
     font-size: 18pt;
+    user-select: none;
 }
 
 #containerSaldo h1{
@@ -66,14 +67,22 @@ ul{
     font-size: 44pt;
 }
 
-#containerSaldo .saldo-escrita{
+#containerSaldo #saldo-escrita{
     display: flex;
     align-items: baseline;
 }
 
-#blind{
+.olharSaldo{
     position: absolute;
     height: 50px;
-    transform: translate(150px, 15px);
+    transform: translate(450px, 15px);
     cursor: pointer;
+}
+
+#view{
+    display: none;
+}
+
+#saldo-escrita h1{
+    user-select: none;
 }
