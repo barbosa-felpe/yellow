@@ -1,14 +1,22 @@
+import mysql.connector
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, request, jsonify, render_template
-import json, os
 
 app = Flask(__name__)
-ARQUIVO_JSON = os.path.join(os.path.dirname(__file__), "usuario.json")
 
+# 🔹 Função para criar conexão com o banco MySQL
+def get_connection():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="12345678",
+        database="cadastro"
+    )
 
+# ================= Rotas =================
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 @app.route("/cadastro")
 def cadastro():
@@ -22,44 +30,101 @@ def login():
 def dashboard():
     return render_template("dashboard.html")
 
+# ================= Cadastro =================
 @app.route("/cadastrar", methods=["POST"])
 def cadastrar():
-    novo_usuario = request.get_json()  # renomeei p/ evitar conflito
-    print("Recebido no Flask:", novo_usuario)
+    try:
+        novo_usuario = request.get_json()
+        print("📥 Recebido no Flask:", novo_usuario)
 
-    if not novo_usuario:
-        return jsonify({"mensagem": "Erro: nenhum dado recebido"}), 400
+        if not novo_usuario:
+            return jsonify({"erro": "Nenhum dado recebido"}), 400
 
-    # Carregar os usuários já existentes
-    if os.path.exists(ARQUIVO_JSON):
-        with open(ARQUIVO_JSON, "r") as f:
-            usuarios = json.load(f)
-    else:
-        usuarios = []
+        # Validação mínima
+        required_fields = ["nome", "senha", "tel", "email", "cpf"]
+        for field in required_fields:
+            if not novo_usuario.get(field):
+                return jsonify({"erro": f"Campo '{field}' é obrigatório"}), 400
 
-    # Verificar se já existe CPF cadastrado
-    for usuario in usuarios:
-        if usuario["cpf"] == novo_usuario["cpf"]:
-            return jsonify({"erro": "CPF já cadastrado"}), 400
+        conn = get_connection()
+        cursor = conn.cursor(dictionary=True)
 
-    for usuario in usuarios:
-        if usuario["email"] == novo_usuario["email"]:
-            return jsonify({"erro": "Email já cadastrado"}), 400
-        
-    for usuario in usuarios:
-        if usuario["tel"] == novo_usuario["tel"]:
-            return jsonify({"erro": "Email já cadastrado"}), 400
+        # Verificar duplicatas
+        cursor.execute(
+            "SELECT * FROM usuarios WHERE cpf = %s OR email = %s OR tel = %s",
+            (novo_usuario["cpf"], novo_usuario["email"], novo_usuario["tel"])
+        )
+        existente = cursor.fetchone()
 
-    # Se não existir, adiciona
-    usuarios.append(novo_usuario)
+        if existente:
+            if existente["cpf"] == novo_usuario["cpf"]:
+                return jsonify({"erro": "CPF já cadastrado"}), 400
+            if existente["email"] == novo_usuario["email"]:
+                return jsonify({"erro": "Email já cadastrado"}), 400
+            if existente["tel"] == novo_usuario["tel"]:
+                return jsonify({"erro": "Telefone já cadastrado"}), 400
 
-    # Salva no arquivo JSON
-    with open(ARQUIVO_JSON, "w") as f:
-        json.dump(usuarios, f, indent=2)
+        # Gerar hash da senha
+        senha_hash = generate_password_hash(novo_usuario["senha"])
 
-    return jsonify({"mensagem": "Cadastro realizado com sucesso!"})
+        # Inserir usuário no banco
+        cursor.execute(
+            """
+            INSERT INTO usuarios (nome, senha, tel, email, cpf)
+            VALUES (%s, %s, %s, %s, %s)
+            """,
+            (
+                novo_usuario["nome"],
+                senha_hash,
+                novo_usuario["tel"],
+                novo_usuario["email"],
+                novo_usuario["cpf"]
+            )
+        )
+        conn.commit()
 
+        cursor.close()
+        conn.close()
 
+        return jsonify({"mensagem": "Cadastro realizado com sucesso!"}), 200
 
+    except Exception as e:
+        print("🔥 Erro no backend (cadastro):", e)
+        return jsonify({"erro": str(e)}), 500
+
+# ================= Login =================
+@app.route("/logar", methods=["POST"])
+def logar():
+    try:
+        dados = request.get_json()
+        print("📥 Tentativa de login:", dados)
+
+        # Validação por campo
+        required_fields = ["cpf", "senha"]
+        for field in required_fields:
+            if not dados.get(field):
+                return jsonify({"erro": f"Campo '{field}' é obrigatório"}), 400
+
+        conn = get_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM usuarios WHERE cpf = %s", (dados["cpf"],))
+        usuario = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if not usuario:
+            return jsonify({"erro": "Usuário não encontrado"}), 404
+
+        if check_password_hash(usuario["senha"], dados["senha"]):
+            return jsonify({"mensagem": f"Bem-vindo, {usuario['nome']}!"}), 200
+        else:
+            return jsonify({"erro": "Senha incorreta"}), 401
+
+    except Exception as e:
+        print("🔥 Erro no backend (login):", e)
+        return jsonify({"erro": str(e)}), 500
+    
 if __name__ == "__main__":
     app.run(debug=True)

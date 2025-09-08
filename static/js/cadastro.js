@@ -1,20 +1,35 @@
-document.getElementById("formCadastro").addEventListener("submit", function(e) {
-    e.preventDefault(); // evita reload da página
-  
-    const usuario = {
-      nome: document.getElementById("nmCompleto").value,
-      senha: document.getElementById("senha").value,
-      tel: document.getElementById("tel").value,
-      email: document.getElementById("email").value,
-      cpf: document.getElementById("cpf").value
-    };
-  
-    fetch("/cadastrar", {
+document.getElementById("formCadastro").addEventListener("submit", async function(e) {
+  e.preventDefault(); // evita reload da página
+
+  // Criar objeto com os dados do formulário
+  const usuario = {
+    nome: document.getElementById("nmCompleto").value.trim(),
+    senha: document.getElementById("senha").value.trim(),
+    tel: document.getElementById("tel").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    cpf: document.getElementById("cpf").value.trim()
+  };
+
+  try {
+    const response = await fetch("/cadastrar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(usuario)
-    })
-    .then(res => res.json())
-    .then(data => alert(data.mensagem || data.erro))
-    .catch(err => console.error(err));
-  });
+    });
+
+    const data = await response.json();
+    console.log("Resposta do backend:", data);
+
+    if (response.ok && data.mensagem) {
+      alert(data.mensagem);
+      window.location.href = "/login"; // redireciona
+    } else if (data.erro) {
+      alert("Erro: " + data.erro);
+    } else {
+      alert("Erro inesperado. Tente novamente.");
+    }
+  } catch (err) {
+    console.error("Erro na requisição:", err);
+    alert("Não foi possível conectar ao servidor.");
+  }
+});

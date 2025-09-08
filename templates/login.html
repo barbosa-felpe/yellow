@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <title>Login - Yellow</title>
 </head>
 
@@ -13,36 +13,38 @@
     <div class="tudao">
         <div class="coluna esquerda">
             <div class="cadastrin">
-                <form action="">
-                    <img src="../static/img/Yellow Letra.png" style="cursor: pointer;"
+                <form id="formLogin">
+                    <img src="{{ url_for('static', filename='img/Yellow Letra.png') }}" style="cursor: pointer;"
                         onclick="window.location.href='/'" alt="" class="letra">
-                    <input type="text" placeholder="CPF: " class="inp">
-                    <input type="password" placeholder="Senha: " class="inp">
+
+                    <input type="text" id="cpf" placeholder="CPF: "required class="inp">
+                    <input type="password" id="senha" placeholder="Senha: "required class="inp">
 
                     <div class="senhas">
                         <label class="checkbox-container">
                             <input type="checkbox" id="checkbox">
                             <span class="checkmark"></span>
                         </label>
-
                         <p>Lembre de Mim</p>
-
-
                     </div>
 
                     <a href="#" class="esqueci">Esqueci a senha</a>
 
-                    <input type="submit" class="butão" onclick="event.preventDefault(); window.location.href='/dashboard'">
+                    <input type="submit" class="butão" value="Login">
+
+                    
                 </form>
             </div>
         </div>
 
         <div class="coluna direita">
-            <h1>Bom te ver de novo! Bora garantir <br> a proxima viagem? </h1>
-            <img src="../static/img/cartoes.svg" alt="Cartão do busao" class="img">
+            <h1>Bom te ver de novo! Bora garantir <br> a próxima viagem?</h1>
+            <img src="{{ url_for('static', filename='img/cartoes.svg') }}" alt="Cartão do busao" class="img">
         </div>
     </div>
 
+    <!-- Incluindo o JS externo -->
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 
 </html>
