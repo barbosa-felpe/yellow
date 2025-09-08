@@ -59,6 +59,33 @@ def cadastrar():
 
     return jsonify({"mensagem": "Cadastro realizado com sucesso!"})
 
+@app.route("/logar", methods=["POST"])
+def logar():
+    verificacaoSenha = False
+    verificacaoCPF = False
+
+    usuarioLogin = request.get_json()
+
+    with open("usuario.json", "r", encoding="utf-8") as f:
+        usuarios = json.load(f)
+
+
+    for usuario in usuarios:
+        if usuario["cpf"] == usuarioLogin["cpf"]:
+            verificacaoCPF = True
+        else:
+            verificacaoCPF = False
+
+        if usuario["senha"] == usuarioLogin["senha"]:
+            verificacaoSenha = True
+        else:
+            verificacaoSenha = False
+
+    if verificacaoSenha and verificacaoCPF:
+        return jsonify({"mensagem": "Login bem-sucedido!"})
+    else:
+        return jsonify({"erro": "Senha ou CPF incorreto"}), 400
+
 
 
 if __name__ == "__main__":

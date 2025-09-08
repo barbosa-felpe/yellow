@@ -96,7 +96,7 @@
         <form id="formCadastro" action="">
             <input type="text" id="nmCompleto" placeholder="Nome Completo" required>
             <input type="password" id="senha" placeholder="Senha" required>
-            <input type="tel" id="tel" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" placeholder="Número de Telefone" required>
+            <input type="tel" id="tel" placeholder="Número de Telefone" required>
             <input type="email" placeholder="Email" required id="email">
             <input type="text" id="cpf" placeholder="CPF" maxlength="11" required>
 
@@ -116,8 +116,19 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/cadastro.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tel').mask('(00) 00000-0000'); 
+        });
 
-    
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00'); 
+        });
+    </script>
+
+
 </body>
 
 </html>
