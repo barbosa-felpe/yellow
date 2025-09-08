@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'SFPRO BOLD';
+    src: url("../fontes/SFPRODISPLAYBOLD.OTF") format('truetype');
+  }
+@font-face {
+    font-family: 'SFPRO MEDIUM';
+    src: url("../fontes/SFPRODISPLAYMEDIUM.OTF");
+}
+
+@font-face {
+    font-family: 'SFPRO REGULAR';
+    src: url("../fontes/SFPRODISPLAYREGULAR.OTF");
+}
+
+body{
+    margin: 0;
+    
+}
+
+header{
+    background-color: #ffcf00;
+    height: 100px;
+    display: flex;
+    justify-content: space-between; /* deixa os itens começando do canto esquerdo */
+    padding: 0 20px;
+    align-items: center;
+
+ /* opcional, para não grudar no canto */
+   
+}
+
+svg{
+    height: 60px;
+}
+
+ul{
+    justify-content: flex-end;
+    list-style-type: none;
+    display: flex;
+    gap: 60px;
+    padding-right: 50px;
+    font-family: SFPRO BOLD;
+    font-size: 15pt;
+}
+
+#searchResults {
+            border: 1px solid #ddd;
+            border-top: none;
+            
+            /* --- ESTA É A LINHA MAIS IMPORTANTE --- */
+            max-height: 220px; /* Define a altura máxima da caixa. Você pode mudar este valor! */
+
+            /* --- E ESTA É A SEGUNDA LINHA MAIS IMPORTANTE --- */
+            overflow-y: auto;  /* Adiciona a barra de rolagem vertical APENAS se for necessário */
+
+            position: absolute;
+            background-color: white;
+            width: 250px; 
+            z-index: 1000;
+}
+
+        /* Estiliza cada item individual na lista de resultados */
+.search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+}

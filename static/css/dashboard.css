@@ -15,6 +15,7 @@
 body{
     margin: 0;
     font-family: SFPRO BOLD;
+    height: 100vh;
 }
 
 header{
@@ -85,4 +86,103 @@ ul{
 
 #saldo-escrita h1{
     user-select: none;
+}
+
+#recarregue{
+    border: none;
+    background-color: #ffcf00;
+    font-family: SFPRO BOLD;
+    border-radius: 25px;
+    font-size: 18pt;
+    box-sizing: border-box;
+    width: 200px;
+    height: 50px;
+    margin-top: 15px;
+    user-select: none;
+}
+
+#recarregue:hover{
+    background-color: #e9bf07;
+    cursor: pointer;
+}
+
+#recarregue:active{
+    transform: scale(0.95);
+    
+}
+
+hr{
+    margin-top: 50px;
+
+}
+
+#linhasOnibus{
+    display: flex;
+    background-color: #efefef;
+    width: 532px;
+    height: 826px;
+    border-radius: 25px;
+    margin-right: 50px;
+    justify-content: flex-end;
+
+}
+
+#containerSuperior{
+    display: flex;
+}
+
+
+
+#containerMid{
+    display: flex;
+    justify-content: space-between; /* um na esquerda e outro na direita */
+               /* centraliza verticalmente */
+       /* ocupa a tela inteira, menos o header */
+    margin: 0 50px;                 /* respiro lateral */
+}
+
+/*====linhas de trem====*/
+
+#container-linhas{
+    background-color: #efefef;
+    width: 500px;
+    height: 730px;
+    margin: 50px 0px auto 700px;  
+    border-radius: 25px;
+}
+
+#container-linhas h1{
+    margin: 30px 30px;
+    font-size: 18pt;
+}
+
+#linhasPreferidas{
+    display: flex;
+    align-items: center;
+    background-color: #ffcf00;
+    margin: 20px 20px;
+    height: 50px;
+    border-radius: 15px;
+}
+
+#linhasPreferidas:hover{
+    background-color: #e9bf07;
+    cursor: pointer;
+}
+
+#linhasPreferidas h1{
+    margin: 0;
+    padding: 10px;
+    
+    
+}
+
+#quebraLinha{
+    background-color: #efefef;
+    height: 2px;
+    width: 1200px;
+    margin: 0px 50px;
+    position: relative;
+    top: -350px; /* sobe 100px */
+    border-radius: 1px;
 }

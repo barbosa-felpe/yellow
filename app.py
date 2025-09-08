@@ -48,7 +48,7 @@ def cadastrar():
         
     for usuario in usuarios:
         if usuario["tel"] == novo_usuario["tel"]:
-            return jsonify({"erro": "Email já cadastrado"}), 400
+            return jsonify({"erro": "Telefone já cadastrado"}), 400
 
     # Se não existir, adiciona
     usuarios.append(novo_usuario)
@@ -85,6 +85,38 @@ def logar():
         return jsonify({"mensagem": "Login bem-sucedido!"})
     else:
         return jsonify({"erro": "Senha ou CPF incorreto"}), 400
+   
+try:
+    with open('linhas.json', 'r', encoding='utf-8') as f:
+        dados_onibus = json.load(f)
+except FileNotFoundError:
+    print("ERRO: O arquivo 'onibus.json' não foi encontrado. A API usará dados vazios.")
+    dados_onibus = {"terminais": []}
+except json.JSONDecodeError:
+    print("ERRO: O arquivo 'onibus.json' está mal formatado.")
+    dados_onibus = {"terminais": []}
+    
+@app.route("/linhas")
+def linhas():
+    return render_template("linhas.html")
+
+@app.route('/api/linhas', methods=['GET'])
+def obter_todas_as_linhas():
+    # A função agora simplesmente retorna a variável que já está na memória. Super rápido!
+    return jsonify(dados_onibus)
+
+# Rota da API para buscar uma linha ESPECÍFICA (não usada pela busca ao vivo, mas é útil ter)
+@app.route('/api/linha/<string:codigo>', methods=['GET'])
+def obter_linha_por_codigo(codigo):
+    
+    # O método .get() é uma forma segura de acessar chaves de um dicionário
+    for terminal in dados_onibus.get('terminais', []):
+        for linha in terminal.get('linhas', []):
+            if linha.get('codigo') == codigo:
+                return jsonify(linha)
+    
+    # Se não encontrar, retorna uma mensagem de erro com o código 404 (Não Encontrado)
+    return jsonify({"erro": "Linha não encontrada"}), 404
 
 
 
