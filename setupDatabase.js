@@ -1,4 +1,32 @@
-{
+// setupDatabase.js
+const sqlite3 = require('sqlite3').verbose();
+
+// Cria ou abre o arquivo do banco de dados
+const db = new sqlite3.Database('./linhas.db', (err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Conectado ao banco de dados linhas.db.');
+});
+
+// Serializa a execução para garantir que os comandos rodem em ordem
+db.serialize(() => {
+    // Cria a tabela de linhas se ela não existir
+    db.run(`CREATE TABLE IF NOT EXISTS linhas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        codigo TEXT NOT NULL UNIQUE,
+        nome TEXT NOT NULL
+    )`, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log("Tabela 'linhas' criada com sucesso.");
+    });
+
+    // Prepara o statement para inserir múltiplas linhas
+    const stmt = db.prepare("INSERT OR IGNORE INTO linhas (codigo, nome) VALUES (?, ?)");
+
+    const terminais = {
   "terminais": [
     {
       "nome": "Terminal Central",
@@ -330,3 +358,27 @@
     }
   ]
 }
+
+    terminais.terminais.forEach(terminal => {
+        terminal.linhas.forEach(linha => {
+            stmt.run(linha.codigo, linha.nome);
+        });
+    });
+
+    // Finaliza o statement
+    stmt.finalize((err) => {
+        if (err) {
+            console.error('Erro ao inserir dados:', err.message);
+        } else {
+            console.log('Dados de exemplo inseridos com sucesso.');
+        }
+    });
+});
+
+// Fecha a conexão com o banco de dados
+db.close((err) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    console.log('Conexão com o banco de dados fechada.');
+});
