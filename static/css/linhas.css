@@ -45,25 +45,25 @@ ul{
 }
 
 #searchResults {
-
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* força os itens ficarem um embaixo do outro */
+    align-items: stretch;   /* ocupa toda a largura */
     border: 1px solid #ddd;
     border-top: none;            
-    /* --- ESTA É A LINHA MAIS IMPORTANTE --- */       
-    max-height: 220px; /* Define a altura máxima da caixa. Você pode mudar este valor! */
-    /* --- E ESTA É A SEGUNDA LINHA MAIS IMPORTANTE --- */
-    overflow-y: auto;  /* Adiciona a barra de rolagem vertical APENAS se for necessário */        
+    max-height: 220px; 
+    overflow-y: auto;      /* só scroll vertical */
+    overflow-x: hidden;    /* remove scroll lateral */
     position: absolute;
     background-color: white;
     width: 250px;             
     z-index: 1000;
 }
 
-        /* Estiliza cada item individual na lista de resultados */
-.search-result-item {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #f1f1f1;
-}
 
+        /* Estiliza cada item individual na lista de resultados */
+        .search-result-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f1f1;
+            white-space: normal; /* quebra texto grande */
+        }
