@@ -24,3 +24,11 @@ botaoVerSaldo.forEach(botao => {
     })
 })
 
+const slider = document.getElementById("scrollWrapper");
+
+slider.addEventListener("wheel", (e) => {
+  e.preventDefault(); // impede scroll vertical
+  slider.scrollLeft += e.deltaY; // transforma em scroll horizontal
+});
+
+

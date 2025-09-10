@@ -14,6 +14,7 @@
 
 body{
     margin: 0;
+    height: 100vh - 100px;
     
 }
 
@@ -44,19 +45,19 @@ ul{
 }
 
 #searchResults {
-            border: 1px solid #ddd;
-            border-top: none;
-            
-            /* --- ESTA É A LINHA MAIS IMPORTANTE --- */
-            max-height: 220px; /* Define a altura máxima da caixa. Você pode mudar este valor! */
 
-            /* --- E ESTA É A SEGUNDA LINHA MAIS IMPORTANTE --- */
-            overflow-y: auto;  /* Adiciona a barra de rolagem vertical APENAS se for necessário */
-
-            position: absolute;
-            background-color: white;
-            width: 250px; 
-            z-index: 1000;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-top: none;            
+    /* --- ESTA É A LINHA MAIS IMPORTANTE --- */       
+    max-height: 220px; /* Define a altura máxima da caixa. Você pode mudar este valor! */
+    /* --- E ESTA É A SEGUNDA LINHA MAIS IMPORTANTE --- */
+    overflow-y: auto;  /* Adiciona a barra de rolagem vertical APENAS se for necessário */        
+    position: absolute;
+    background-color: white;
+    width: 250px;             
+    z-index: 1000;
 }
 
         /* Estiliza cada item individual na lista de resultados */
@@ -65,3 +66,4 @@ ul{
     cursor: pointer;
     border-bottom: 1px solid #f1f1f1;
 }
+

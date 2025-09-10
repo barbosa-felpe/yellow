@@ -169,4 +169,10 @@ form input:focus{
     font-family: SFPRO BOLD;
 }
 
+#cartao{
+    background-color: #ffcf00;
+    height: 30px;
+    width: 60px;
+}
+
 

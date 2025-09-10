@@ -154,6 +154,7 @@ hr{
 #container-linhas h1{
     margin: 30px 30px;
     font-size: 18pt;
+    user-select: none;
 }
 
 #linhasPreferidas{
@@ -183,6 +184,40 @@ hr{
     width: 1200px;
     margin: 0px 50px;
     position: relative;
-    top: -350px; /* sobe 100px */
+    top: -380px; /* sobe 100px */
     border-radius: 1px;
 }
+
+.wrapper{
+    cursor: grab;
+    position: relative;
+    top: -330px; /* sobe 100px */
+    width: 1200px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.wrapper:active {
+    cursor: grabbing;
+  }
+
+#cartoes{
+    display: flex;
+    
+}
+
+
+#cartao{
+    background-color: #ffcf00;
+    height: 300px;
+    width: 500px;
+    border-radius: 20px;
+    
+    margin-left: 50px;
+    flex-shrink: 0;
+}
+
