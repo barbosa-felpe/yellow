@@ -14,7 +14,7 @@
 
 body{
     margin: 0;
-    height: 100vh - 100px;
+    height: calc(100vh - 100px);
     
 }
 
@@ -44,26 +44,64 @@ ul{
     font-size: 15pt;
 }
 
+h1{
+    font-family: SFPRO BOLD;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    font-size: 30pt;
+
+}
+
+#barraPesquisa {
+    position: absolute;
+    top: calc(25% + 50px); /* 50px = metade do header (100px) */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#searchInput{
+    background-color: #ffffff;
+    border: none;
+    width: 700px; 
+    padding: 20px; 
+    border-radius: 20px;
+    font-size: 16px;
+    outline: 1px solid black;
+}
+
+
+
+
+
+
 #searchResults {
+    margin-top: 1px;
     display: flex;
     flex-direction: column; /* força os itens ficarem um embaixo do outro */
     align-items: stretch;   /* ocupa toda a largura */
-    border: 1px solid #ddd;
+    border: 1px solid #efefef ;
     border-top: none;            
     max-height: 220px; 
     overflow-y: auto;      /* só scroll vertical */
     overflow-x: hidden;    /* remove scroll lateral */
     position: absolute;
     background-color: white;
-    width: 250px;             
+    width: 700px;             
     z-index: 1000;
+    border-radius: 20px;
+    
+}
+        /* Estiliza cada item individual na lista de resultados */
+.search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    white-space: normal; /* quebra texto grande */
+    border-bottom: none; /* remove a linha */
 }
 
+.search-result-item:last-child {
+    border-bottom: none;
+}       
 
-        /* Estiliza cada item individual na lista de resultados */
-        .search-result-item {
-            padding: 10px;
-            cursor: pointer;
-            border-bottom: 1px solid #f1f1f1;
-            white-space: normal; /* quebra texto grande */
-        }
+
