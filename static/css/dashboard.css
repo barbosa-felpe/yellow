@@ -15,7 +15,11 @@
 body{
     margin: 0;
     font-family: SFPRO BOLD;
-    height: 100vh;
+    
+    min-height: calc(100px - 100vh); /* Garante que o body ocupe no mínimo toda a altura da tela */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 header{
@@ -43,6 +47,15 @@ ul{
     font-family: SFPRO BOLD;
     font-size: 15pt;
 }
+
+#mainContainer{
+    flex: 1; /* Faz este container crescer para ocupar o espaço livre */
+    display: flex;
+    flex-direction: column; /* Empilha o conteúdo do mainContainer verticalmente */
+    justify-content: center; /* Centraliza o conteúdo na vertical */
+    align-items: center;     /* Centraliza o conteúdo na horizontal */
+}
+
 
 #containerSaldo{
     background-color: #efefef;
@@ -188,14 +201,34 @@ hr{
     border-radius: 1px;
 }
 
+#scrollWrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    cursor: grab;
+  }
+  
+  #scrollWrapper.active {
+    cursor: grabbing;
+  }
+  
+  /* Opcional: para esconder a barra de rolagem se desejar */
+  #scrollWrapper::-webkit-scrollbar {
+    display: none;
+  }
+  #scrollWrapper {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
 .wrapper{
     cursor: grab;
     position: relative;
     top: -330px; /* sobe 100px */
+    left: -310px;
     width: 1200px;
     overflow-x: hidden;
     overflow-y: hidden;
-    scroll-behavior: smooth;
+    
     white-space: nowrap;
     mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);

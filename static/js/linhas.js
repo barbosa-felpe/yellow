@@ -44,9 +44,9 @@
                 
                 // Opcional: Adiciona uma ação ao clicar no resultado
                 item.onclick = () => {
-                    alert(`Você selecionou a linha: ${linha.nome}`);
-                    document.getElementById('searchInput').value = linha.codigo; // Preenche o input
+                    document.getElementById('searchInput').value = `${linha.codigo} - ${linha.nome}`;
                     searchResultsContainer.innerHTML = ''; // Limpa os resultados
+                    desenharRota(linha.codigo); // Chama a função para desenhar a rota no mapa
                 };
                 
                 searchResultsContainer.appendChild(item);
@@ -78,3 +78,58 @@
             // Mostra os resultados filtrados na tela
             displayResults(filteredLines);
         });
+
+const joinvilleCoords = [-26.3045, -48.8477];
+
+// Inicializa o mapa no div com o ID 'mapa'
+const mapa = L.map('mapa').setView(joinvilleCoords, 13);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(mapa);
+
+let rotaAtual = null;
+
+async function desenharRota(codigoLinha) {
+    // 1. Limpa a rota anterior do mapa, se existir
+    if (rotaAtual) {
+        mapa.removeLayer(rotaAtual);
+    }
+
+    try {
+        console.log(`Buscando rota para a linha ${codigoLinha}...`);
+
+        // 2. Busca os dados da rota na API que criamos no Flask
+        const response = await fetch(`/api/rota/${codigoLinha}`);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.erro || 'Rota não encontrada.');
+        }
+        const dataRota = await response.json();
+        
+        // A API já retorna os pontos no formato [latitude, longitude]
+        const coordenadas = dataRota.pontos;
+
+        if (!coordenadas || coordenadas.length === 0) {
+            console.warn(`A rota para a linha ${codigoLinha} não possui pontos.`);
+            return;
+        }
+
+        // 3. Cria a polilinha (a rota) com as coordenadas
+        const rotaLinha = L.polyline(coordenadas, { 
+            color: '#0055b3', // Um tom de azul escuro
+            weight: 5,
+            opacity: 0.8
+        });
+
+        // 4. Adiciona a nova rota ao mapa e a armazena na variável 'rotaAtual'
+        rotaAtual = rotaLinha.addTo(mapa);
+        
+        // 5. Ajusta o zoom e a centralização do mapa para mostrar a rota inteira
+        mapa.fitBounds(rotaAtual.getBounds(), { padding: [30, 30] });
+
+    } catch (error) {
+        console.error(`Falha ao desenhar a rota para ${codigoLinha}:`, error);
+        alert(`Não foi possível carregar a rota: ${error.message}`);
+    }
+}
