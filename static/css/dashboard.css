@@ -198,6 +198,7 @@ hr{
     margin: 0px 50px;
     position: relative;
     top: -380px; /* sobe 100px */
+    left: -250px;
     border-radius: 1px;
 }
 

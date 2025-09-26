@@ -52,6 +52,10 @@ def login():
 def dashboard():
     return render_template("dashboard.html")
 
+@app.route("/recarga")
+def recarga():
+    return render_template("recarga.html")
+
 @app.route("/cadastrar", methods=["POST"])
 def cadastrar():
     try:

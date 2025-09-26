@@ -23,7 +23,7 @@ body{
 header{
     background-color: #000000;
     height: 100px;
-    display: flex;
+    display: flex;  
     justify-content: space-between;
     align-items: center;
     padding: 0 40px;
@@ -110,6 +110,12 @@ main button:active {
 main svg{
     display: block;
     
+}
+
+#littleBus{
+    position: relative;
+    bottom: -180px;
+    right: -42px;
 }
 
 #main2 h1{
