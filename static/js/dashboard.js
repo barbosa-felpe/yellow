@@ -1,28 +1,24 @@
-const saldoDisplay = document.getElementById("saldoDisplay")
-const botaoVerSaldo = document.querySelectorAll(".olharSaldo")
+// Pega o elemento que mostra o saldo
+const saldoDisplay = document.getElementById("saldoDisplay");
+const botaoVerSaldo = document.querySelectorAll(".olharSaldo");
 
-let verSaldo = false
-let saldo = "1600,00"
-
-saldoDisplay.innerText = saldo
+let verSaldo = true; // inicialmente o saldo está visível
+const saldoOriginal = saldoDisplay.innerText; // pega o saldo renderizado pelo Flask
 
 botaoVerSaldo.forEach(botao => {
     botao.addEventListener("click", function () {
-        verSaldo = !verSaldo
-    
+        verSaldo = !verSaldo;
+
         if (verSaldo) {
-            document.getElementById("blind").style.display = "none"
-            document.getElementById("view").style.display = "block"
-
-            saldoDisplay.innerText = "*".repeat(saldo.length)
+            // Mostra o saldo real
+            saldoDisplay.innerText = saldoOriginal;
         } else {
-            document.getElementById("blind").style.display = "block"
-            document.getElementById("view").style.display = "none"
-
-            saldoDisplay.innerText = saldo
+            // Oculta o saldo com asteriscos
+            saldoDisplay.innerText = "*".repeat(saldoOriginal.length);
         }
-    })
-})
+    });
+});
+
 
 const slider = document.getElementById("scrollWrapper");
 let isDown = false;
