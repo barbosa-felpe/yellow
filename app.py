@@ -226,7 +226,7 @@ def obter_rota_por_codigo(codigo):
 def dashboard():
     user_id = session.get("user_id")
     if not user_id:
-        return "Usuário não logado", 401
+        return render_template("login.html"), 401
 
     try:
         conn = get_connection()
