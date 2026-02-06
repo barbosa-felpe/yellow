@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recarga - Yellow</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css') }}"
+    />
+    <style>
+      /* CSS Específico para Centralizar a Recarga */
+      body {
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: sans-serif;
+      }
+      .box-recarga {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      .valor-input {
+        font-size: 2em;
+        text-align: center;
+        width: 100%;
+        border: none;
+        border-bottom: 2px solid #ffcc00;
+        outline: none;
+        margin: 20px 0;
+        color: #333;
+      }
+      .btn-confirmar {
+        background: #000;
+        color: #ffcc00;
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-confirmar:hover {
+        transform: scale(1.02);
+      }
+      .voltar {
+        margin-top: 20px;
+        display: block;
+        color: #666;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box-recarga">
+      <img
+        src="{{ url_for('static', filename='img/Yellow Letra.png') }}"
+        alt="Yellow"
+        width="120"
+      />
+
+      <h2>Quanto você quer recarregar?</h2>
+      <p>O saldo cairá na sua conta e valerá para todos os seus cartões.</p>
+
+      <input
+        type="number"
+        id="valor"
+        class="valor-input"
+        placeholder="R$ 0,00"
+        step="0.01"
+        min="1"
+      />
+
+      <div
+        style="
+          margin-bottom: 20px;
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+        "
+      >
+        <button
+          onclick="setValor(10)"
+          style="
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+          "
+        >
+          R$ 10
+        </button>
+        <button
+          onclick="setValor(20)"
+          style="
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+          "
+        >
+          R$ 20
+        </button>
+        <button
+          onclick="setValor(50)"
+          style="
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+          "
+        >
+          R$ 50
+        </button>
+      </div>
+
+      <button onclick="fazerRecarga()" class="btn-confirmar">
+        Confirmar Recarga
+      </button>
+
+      <a href="/dashboard" class="voltar">Cancelar</a>
+    </div>
+
+    <script>
+      // Funçãozinha para os botões de atalho
+      function setValor(v) {
+        document.getElementById("valor").value = v;
+      }
+
+      async function fazerRecarga() {
+        const valor = document.getElementById("valor").value;
+
+        if (!valor || valor <= 0) {
+          alert("Por favor, digite um valor válido.");
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/realizar_recarga", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ valor: valor }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert("Recarga realizada com sucesso!");
+            window.location.href = data.redirect;
+          } else {
+            alert(data.erro || "Erro ao recarregar.");
+          }
+        } catch (error) {
+          console.error("Erro:", error);
+          alert("Erro de conexão.");
+        }
+      }
+    </script>
+  </body>
+</html>

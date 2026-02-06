@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novo Cartão - Yellow</title>
+  </head>
+  <body>
+    <div class="card-box">
+      <img
+        src="{{ url_for('static', filename='img/Yellow Letra.png') }}"
+        alt="Yellow"
+        width="100"
+        style="margin-bottom: 20px"
+      />
+
+      <h2>Solicitar Novo Cartão</h2>
+      <p style="color: #666; font-size: 14px; margin-bottom: 20px">
+        Digite um nome para identificar seu cartão e confirme sua senha.
+      </p>
+
+      <form action="{{ url_for('adicionar_cartao') }}" method="POST">
+        <input
+          type="text"
+          name="nome"
+          class="inp"
+          placeholder="Nome do Cartão (Ex: Trabalho)"
+          required
+        />
+
+        <input
+          type="password"
+          name="senha"
+          class="inp"
+          placeholder="Sua Senha de Login"
+          required
+        />
+
+        <button type="submit" class="butão">Gerar Cartão</button>
+      </form>
+
+      <a href="/dashboard" class="voltar">← Voltar para Dashboard</a>
+    </div>
+  </body>
+</html>
